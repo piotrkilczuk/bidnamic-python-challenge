@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+
+  python:
+    build: .
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    volumes:
+      - ".:/code"
+    ports:
+      - "58000:8000"
+
+  postgres:
+    image: postgres:latest
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=bidnamic
+      - POSTGRES_PASSWORD=bidnamic
+    ports:
+      - "55432:5432"
